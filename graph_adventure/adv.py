@@ -2,6 +2,8 @@ from room import Room
 from player import Player
 from world import World
 
+# Init
+
 import random
 
 # Load world
