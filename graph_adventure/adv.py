@@ -69,127 +69,137 @@ def maze_runner():
         if current_room not in visited:
             # Do stuff for brand new room.
             visited.add(current_room)
-            if "n" in current_room.getExits():
-                print("North exists")
-                if room_descriptions[current_room.name]["n"] is "?":
-                    new_path = list(current_path)
-                    last_room = current_room
-                    player.travel("n", False)
-                    new_room = player.currentRoom
-                    room_descriptions[current_room.name]["n"] = new_room.name
-                    print(f"Moving north from {last_room.name}")
-                    print(f"Current room after travel: {new_room.name}")
-                    if new_room not in visited:
-                        room_descriptions[new_room.name] = {}
-                        print(f"Exits: {new_room.getExits()}")
-                        for i in range(0, len(new_room.getExits())):
-                            room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
-                        room_descriptions[new_room.name]["s"] = last_room.name
-                        print(f"Room descriptions after adding last room: {room_descriptions}")
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("n")
-                    stack.push(new_path)
-                else:
-                    print("I've been north of here before.")
-            elif "w" in current_room.getExits():
-                print("West exists")
-                if room_descriptions[current_room.name]["w"] is "?":
-                    new_path = list(current_path)
-                    last_room = current_room
-                    player.travel("w", False)
-                    new_room = player.currentRoom
-                    room_descriptions[current_room.name]["w"] = new_room.name
-                    print(f"Moving west from {last_room.name}")
-                    print(f"Current room after travel: {new_room.name}")
-                    if new_room not in visited:
-                        room_descriptions[new_room.name] = {}
-                        print(f"Exits: {new_room.getExits()}")
-                        for i in range(0, len(new_room.getExits())):
-                            room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
-                        room_descriptions[new_room.name]["e"] = last_room.name
-                        print(f"Room descriptions after adding last room: {room_descriptions}")
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("w")
-                    stack.push(new_path)
-                else:
-                    print("I've been west of here before.")
-            elif "e" in current_room.getExits():
-                print("East exists")
-                if room_descriptions[current_room.name]["e"] is "?":
-                    new_path = list(current_path)
-                    last_room = current_room
-                    player.travel("e", False)
-                    new_room = player.currentRoom
-                    room_descriptions[current_room.name]["e"] = new_room.name
-                    print(f"Moving east from {last_room.name}")
-                    print(f"Current room after travel: {new_room.name}")
-                    if new_room not in visited:
-                        room_descriptions[new_room.name] = {}
-                        print(f"Exits: {new_room.getExits()}")
-                        for i in range(0, len(new_room.getExits())):
-                            room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
-                        room_descriptions[new_room.name]["w"] = last_room.name
-                        print(f"Room descriptions after adding last room: {room_descriptions}")
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("e")
-                    stack.push(new_path)
-                else:
-                    print("I've been east of here before.")
-            elif "s" in current_room.getExits():
-                print("South exists")
-                if room_descriptions[current_room.name]["s"] is "?":
-                    new_path = list(current_path)
-                    last_room = current_room
-                    player.travel("s", False)
-                    new_room = player.currentRoom
-                    room_descriptions[current_room.name]["s"] = new_room.name
-                    print(f"Moving south from {last_room.name}")
-                    print(f"Current room after travel: {new_room.name}")
-                    if new_room not in visited:
-                        room_descriptions[new_room.name] = {}
-                        print(f"Exits: {new_room.getExits()}")
-                        for i in range(0, len(new_room.getExits())):
-                            room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
-                        room_descriptions[new_room.name]["n"] = last_room.name
-                        print(f"Room descriptions after adding last room: {room_descriptions}")
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("s")
-                    stack.push(new_path)
-                else:
-                    print("I've been south of here before.")
-            if "?" not in room_descriptions[current_room.name].values():
-                print("There's no where new for me to go. I need to retrace my last step.")
-                if traversalPath[-1] is "n":
-                    print("I need to go south.")
-                    new_path = list(current_path)
-                    player.travel("s", False)
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("s")
-                    stack.push(new_path)
-                elif traversalPath[-1] is "w":
-                    print("I need to go east.")
-                    new_path = list(current_path)
-                    player.travel("e", False)
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("e")
-                    stack.push(new_path)
-                elif traversalPath[-1] is "e":
-                    print("I need to go west.")
-                    new_path = list(current_path)
-                    player.travel("w", False)
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("w")
-                    stack.push(new_path)
-                elif traversalPath[-1] is "s":
-                    print("I need to go north.")
-                    new_path = list(current_path)
-                    player.travel("n", False)
-                    new_path.append(player.currentRoom)
-                    traversalPath.append("n")
-                    stack.push(new_path)
+        if "n" in current_room.getExits() and room_descriptions[current_room.name]["n"] is "?":
+            print("North exists")
+            new_path = list(current_path)
+            last_room = current_room
+            player.travel("n", False)
+            new_room = player.currentRoom
+            room_descriptions[current_room.name]["n"] = new_room.name
+            print(f"Moving north from {last_room.name}")
+            print(f"Current room after travel: {new_room.name}")
+            if new_room not in visited:
+                room_descriptions[new_room.name] = {}
+                print(f"Exits: {new_room.getExits()}")
+                for i in range(0, len(new_room.getExits())):
+                    room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
+                room_descriptions[new_room.name]["s"] = last_room.name
+                print(f"Room descriptions after adding last room: {room_descriptions}")
+            new_path.append(player.currentRoom)
+            traversalPath.append("n")
+            stack.push(new_path)
+        elif "w" in current_room.getExits() and room_descriptions[current_room.name]["w"] is "?":
+            print("West exists")
+            new_path = list(current_path)
+            last_room = current_room
+            player.travel("w", False)
+            new_room = player.currentRoom
+            room_descriptions[current_room.name]["w"] = new_room.name
+            print(f"Moving west from {last_room.name}")
+            print(f"Current room after travel: {new_room.name}")
+            if new_room not in visited:
+                room_descriptions[new_room.name] = {}
+                print(f"Exits: {new_room.getExits()}")
+                for i in range(0, len(new_room.getExits())):
+                    room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
+                room_descriptions[new_room.name]["e"] = last_room.name
+                print(f"Room descriptions after adding last room: {room_descriptions}")
+            new_path.append(player.currentRoom)
+            traversalPath.append("w")
+            stack.push(new_path)
+        elif "e" in current_room.getExits() and room_descriptions[current_room.name]["e"] is "?":
+            print("East exists")
+            new_path = list(current_path)
+            last_room = current_room
+            player.travel("e", False)
+            new_room = player.currentRoom
+            room_descriptions[current_room.name]["e"] = new_room.name
+            print(f"Moving east from {last_room.name}")
+            print(f"Current room after travel: {new_room.name}")
+            if new_room not in visited:
+                room_descriptions[new_room.name] = {}
+                print(f"Exits: {new_room.getExits()}")
+                for i in range(0, len(new_room.getExits())):
+                    room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
+                room_descriptions[new_room.name]["w"] = last_room.name
+                print(f"Room descriptions after adding last room: {room_descriptions}")
+            new_path.append(player.currentRoom)
+            traversalPath.append("e")
+            stack.push(new_path)
+        elif "s" in current_room.getExits() and room_descriptions[current_room.name]["s"] is "?":
+            print("South exists")
+            new_path = list(current_path)
+            last_room = current_room
+            player.travel("s", False)
+            new_room = player.currentRoom
+            room_descriptions[current_room.name]["s"] = new_room.name
+            print(f"Moving south from {last_room.name}")
+            print(f"Current room after travel: {new_room.name}")
+            if new_room not in visited:
+                room_descriptions[new_room.name] = {}
+                print(f"Exits: {new_room.getExits()}")
+                for i in range(0, len(new_room.getExits())):
+                    room_descriptions[new_room.name][new_room.getExits()[i]] = "?"
+                room_descriptions[new_room.name]["n"] = last_room.name
+                print(f"Room descriptions after adding last room: {room_descriptions}")
+            new_path.append(player.currentRoom)
+            traversalPath.append("s")
+            stack.push(new_path)
+        if "?" not in room_descriptions[current_room.name].values():
+            print("There's no where new for me to go. I need to retrace my last step.")
+            queue = Queue()
+            checked = []
+            bfs_path = []
+            print(f"Current room starting a new queue: {current_room.name}")
+            queue.enqueue([current_room])
+            while queue.size() > 0:
+                shortest_path = queue.dequeue()
+                vertex = shortest_path[-1]
+                print(f"Current vertex: {vertex.name}")
+                if vertex not in checked:
+                    checked.append(vertex)
+                    if "?" in room_descriptions[vertex.name].values():
+                        print(f"I found a path! {bfs_path}")
+                        traversalPath.extend(bfs_path)
+                        new_path = list(current_path)
+                        new_path.append(vertex)
+                        stack.push(new_path)
+                        while queue.size() > 0:
+                            queue.dequeue()
+                    elif "n" in vertex.getExits():
+                        print(f"can check north from {vertex.name}")
+                        test_path = list(shortest_path)
+                        player.travel("n", False)
+                        test_path.append(player.currentRoom)
+                        bfs_path.append("n")
+                        queue.enqueue(test_path)
+                    elif "w" in vertex.getExits():
+                        print(f"can check west from {vertex.name}")
+                        test_path = list(shortest_path)
+                        player.travel("w", False)
+                        test_path.append(player.currentRoom)
+                        bfs_path.append("w")
+                        queue.enqueue(test_path)
+                    elif "e" in vertex.getExits():
+                        print(f"can check east from {vertex.name}")
+                        test_path = list(shortest_path)
+                        player.travel("e", False)
+                        test_path.append(player.currentRoom)
+                        bfs_path.append("e")
+                        queue.enqueue(test_path)
+                    elif "s" in vertex.getExits():
+                        print(f"can check south from {vertex.name}")
+                        test_path = list(shortest_path)
+                        player.travel("s", False)
+                        test_path.append(player.currentRoom)
+                        bfs_path.append("s")
+                        queue.enqueue(test_path)
+
+
+
+
+                
             print(f"Visited {len(visited)} rooms.")
-        else:
-            print(f"I've already been in {current_room.name} before.")
 
 
     print(f"Traversal path: {traversalPath}")
