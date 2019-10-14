@@ -164,6 +164,7 @@ def maze_runner():
                         new_path = list(current_path)
                         new_path.append(vertex)
                         stack.push(new_path)
+                        checked = []
                         while queue.size() > 0:
                             queue.dequeue()
                     elif "s" in vertex.getExits() and vertex.s_to.name not in checked:
@@ -201,7 +202,7 @@ def maze_runner():
                 
             print(f"Visited {len(visited)} rooms.")
 
-
+    print(f"path length: {len(traversalPath)}")
     print(f"Traversal path: {traversalPath}")
 
 maze_runner()
